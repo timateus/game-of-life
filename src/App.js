@@ -1,13 +1,15 @@
 import React, { useState, useCallback, useRef } from 'react';
 import useMeasure from "react-use-measure";
 import chroma from "chroma-js";
+import { FaPlay, FaPause, FaRedo, FaTrash } from "react-icons/fa";
+
 import './App.css';
 
 // Following this tut by Ben Awad
 // https://youtu.be/DvVt11mPuM0
 
-const numRows = 80;
-const numCols = 80;
+const numRows = 50;
+const numCols = 50;
 
 const cellSize = 10;
 const rowColorScale = chroma.scale(['1cddd4', 'd563a1']);
@@ -106,6 +108,48 @@ function App() {
       justifyContent: "center",
       alignItems: "center",
     }}>
+
+
+      <div
+        style={{
+          padding: "20px",
+          color: "1cddd4"
+        }}>
+        <h1>
+        <p>
+          {!running && 
+          <FaPlay
+          color="d563a1"
+          onClick={() => {
+            setRunning(!running);
+            runningRef.current = true;
+            runSimulation();
+          }}      
+        />}
+          {running && 
+          <FaPause
+          color="d563a1"
+          onClick={() => {
+            setRunning(!running);
+            runningRef.current = true;
+            runSimulation();
+          }}      
+        />}
+        </p>
+        <p>
+          <FaRedo 
+            color="d563a1"
+            onClick={initializeRandom} />
+        </p>
+        <p>
+          <FaTrash 
+            color="d563a1"
+            onClick={clear}/>
+        </p>  
+        </h1>
+      </div>
+
+{/* 
       <button
         onClick={() => {
           setRunning(!running);
@@ -115,6 +159,9 @@ function App() {
       >
         {running ? "stop" : "start"}
       </button>
+
+     
+
       <button
         onClick={initializeRandom}>
         random
@@ -122,7 +169,9 @@ function App() {
       <button
         onClick={clear}>
         clear
-      </button>
+      </button> */}
+
+
       <div 
         style={{
           display: "grid",
